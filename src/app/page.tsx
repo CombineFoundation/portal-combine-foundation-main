@@ -55,7 +55,4 @@ const AccountOption = ({ title, href }: AccountOptionProps) => {
   );
 };
 
-<<<<<<< HEAD
-export default AccountTypeSelection;
-=======
 export default AccountTypeSelection;
