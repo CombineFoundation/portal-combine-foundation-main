@@ -24,7 +24,7 @@ const Profile = () => {
     if (data) {
       setTrusteeData(JSON.parse(data));
     } else {
-      router.push("/trustee");
+      router.push("/trustee/profile");
     }
   }, [router]);
 
