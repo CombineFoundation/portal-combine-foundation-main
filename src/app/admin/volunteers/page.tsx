@@ -214,7 +214,6 @@ export default function VolunteerPage() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-2 text-gray-800">USAGES:</h2>
           <div className="h-64 relative w-full overflow-hidden">
             <Chart
               ref={chartRef}
