@@ -34,24 +34,9 @@ const AccountTypeSelection = () => {
 
         {/* Account options grid - no descriptions */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5">
-<<<<<<< HEAD
-          <AccountOption
-            title="Volunteer"
-            href="/login"
-          />
-          <AccountOption
-            title="Admin"
-            href="/login"
-          />
-          <AccountOption
-            title="Trustee"
-            href="/login"
-          />
-=======
           <AccountOption title="Volunteer" href="/login" />
           <AccountOption title="Admin" href="/login" />
           <AccountOption title="Trustee" href="/login" />
->>>>>>> e3efa64 (first commit)
         </div>
       </div>
     </div>
@@ -74,4 +59,3 @@ const AccountOption = ({ title, href }: AccountOptionProps) => {
 export default AccountTypeSelection;
 =======
 export default AccountTypeSelection;
->>>>>>> e3efa64 (first commit)
