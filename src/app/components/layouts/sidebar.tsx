@@ -9,7 +9,6 @@ import {
   Handshake,
   BookOpen,
   GraduationCap,
-  ClipboardList,
   ChevronsLeft,
   ChevronsRight,
   LogOut,
@@ -43,7 +42,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       path: "/admin/courses",
       icon: <GraduationCap size={22} />,
     },
-    { label: "Tasks", path: "/admin/tasks", icon: <ClipboardList size={22} /> },
     { label: "LogOut", path: "/", icon: <LogOut size={22} /> },
   ];
 
