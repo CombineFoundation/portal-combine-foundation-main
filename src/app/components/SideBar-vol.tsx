@@ -76,7 +76,6 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
               { href: "/volunteer/dashboard", label: "Dashboard" },
               { href: "/volunteer/lecture", label: "Lecture" },
               { href: "/volunteer/course", label: "Course" },
-              { href: "/volunteer/tasks", label: "Tasks" },
               { href: "/volunteer/get-card", label: "Get Card" },
             ].map((item) => (
               <Link

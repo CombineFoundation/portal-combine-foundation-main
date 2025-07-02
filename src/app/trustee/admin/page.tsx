@@ -180,7 +180,11 @@ export default function VolunteerLightingUsage() {
   return (
     <>
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <div className="min-h-screen bg-gray-50 p-6">
+      <div
+        className={`min-h-screen bg-gray-50 p-6 transition-all duration-300 ${
+          collapsed ? "ml-20" : "ml-64"
+        }`}
+      >
         <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6 ring-2 ring-orange-400">
           <div className="flex justify-between items-center mb-6">
             <div>

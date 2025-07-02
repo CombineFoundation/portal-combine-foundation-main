@@ -35,7 +35,11 @@ const BeneficiariesPage = () => {
   return (
     <>
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <main className="min-h-screen bg-gray-50 px-6 py-12">
+      <main
+        className={`min-h-screen bg-gray-50 px-6 py-12 transition-all duration-300 ${
+          collapsed ? "ml-20" : "ml-64"
+        }`}
+      >
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
             Our Beneficiaries

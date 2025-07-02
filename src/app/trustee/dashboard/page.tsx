@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import { Sidebar } from "../../components/sidebar";
 import Image from "next/image";
-import ADMIN from "../../images/ADMIN.png"
+import ADMIN from "../../images/ADMIN.png";
 
 const data = [
   { name: "Jan", uv: 850 },
@@ -61,8 +61,10 @@ export default function Dashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           <div className="bg-white text-gray-800 p-6 rounded-xl">
-            <p className="text-lg font-semibold mb-2 text-gray-700">Volunteers this month</p>
-            <p className="text-3xl text-orange-500 font-bold">1,250</p> 
+            <p className="text-lg font-semibold mb-2 text-gray-700">
+              All Volunteers
+            </p>
+            <p className="text-3xl text-orange-500 font-bold">1,250</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow">

@@ -12,6 +12,8 @@ interface VolunteerData {
   email: string;
   volunteerId: string;
   joinDate: string;
+  validFrom: string;
+  validThru: string;
 }
 
 const VolunteerCard = () => {
@@ -32,6 +34,8 @@ const VolunteerCard = () => {
         email: "m.umar@example.com",
         volunteerId: "37521",
         joinDate: "May 01, 2025",
+        validFrom: "JUN 01, 2025",
+        validThru: "AUG 01, 2025",
       });
     }
     setIsLoading(false);
@@ -150,7 +154,7 @@ const VolunteerCard = () => {
           </div>
 
           {/* Cards Container - Added pt-16 to account for fixed header */}
-          <div className="flex flex-col items-center lg:flex-row gap-6 xl:gap-8 justify-center pt-16 md:pt-4">
+          <div className="flex flex-col items-center lg:flex-row gap-6 xl:gap-8 ml-55 justify-center pt-16 md:pt-4">
             {/* Front Side */}
             <div className="w-full max-w-md lg:w-[420px] xl:w-[450px] bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
               {/* Logo Header Section */}
@@ -190,18 +194,21 @@ const VolunteerCard = () => {
 
                 <div className="border-t-2 border-gray-200 my-4 sm:my-5"></div>
 
-                <div className="space-y-3 sm:space-y-4">
-                  <p className="text-base sm:text-lg text-gray-700">
-                    <span className="font-semibold">ID:</span>{" "}
-                    {volunteerData?.volunteerId}
-                  </p>
-                  <p className="text-base sm:text-lg text-gray-700">
-                    <span className="font-semibold">Join Date:</span>{" "}
-                    {volunteerData?.joinDate}
-                  </p>
-                  <p className="text-base sm:text-lg text-gray-700">
-                    <span className="font-semibold">Phone:</span> +92 316 378243
-                  </p>
+                <div className="flex justify-center">
+                  <div className="space-y-3 sm:space-y-4 text-center">
+                    <p className="text-base sm:text-lg text-gray-700">
+                      <span className="font-semibold">ID:</span>{" "}
+                      {volunteerData?.volunteerId}
+                    </p>
+                    <p className="text-base sm:text-lg text-gray-700">
+                      <span className="font-semibold">Join Date:</span>{" "}
+                      {volunteerData?.joinDate}
+                    </p>
+                    <p className="text-base sm:text-lg text-gray-700">
+                      <span className="font-semibold">Phone:</span> +92 316
+                      378243
+                    </p>
+                  </div>
                 </div>
 
                 <div className="mt-8 sm:mt-10 text-center">
@@ -250,12 +257,12 @@ const VolunteerCard = () => {
                     {volunteerData?.fullName}
                   </h3>
                   <p className="text-base sm:text-lg text-gray-700">
-                    <span className="font-semibold">ID:</span>{" "}
-                    {volunteerData?.volunteerId}
+                    <span className="font-semibold">Valid from:</span>{" "}
+                    {volunteerData?.validFrom}
                   </p>
                   <p className="text-base sm:text-lg text-gray-700">
-                    <span className="font-semibold">Join Date:</span>{" "}
-                    {volunteerData?.joinDate}
+                    <span className="font-semibold">Valid thru:</span>{" "}
+                    {volunteerData?.validThru}
                   </p>
                   <p className="text-base sm:text-lg text-gray-700">
                     <span className="font-semibold">CNIC:</span>{" "}
@@ -276,7 +283,7 @@ const VolunteerCard = () => {
                 </div>
 
                 <div className="text-center mt-8 sm:mt-10">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-800 tracking-wider">
+                  <h3 className="text-lg sm:text-xl font-bold text-[#e67e22] tracking-wider">
                     COMBINE FOUNDATION
                   </h3>
                 </div>

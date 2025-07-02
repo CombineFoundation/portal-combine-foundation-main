@@ -7,11 +7,11 @@ const VolunteersPage = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   const volunteers = [
-    { name: "Hamza Ali", joined: "Jan 2024", programs: 3 },
-    { name: "Muhammad Umar", joined: "Feb 2024", programs: 2 },
-    { name: "Jibran", joined: "Mar 2024", programs: 5 },
-    { name: "Ali", joined: "Apr 2024", programs: 4 },
-    { name: "Maliha", joined: "May 2024", programs: 1 },
+    { name: "Hamza Ali", joined: "Jan 2024", programs: "web dev , python" },
+    { name: "Muhammad Umar", joined: "Feb 2024", programs: "data science" },
+    { name: "Jibran", joined: "Mar 2024", programs: "graphic design" },
+    { name: "Ali", joined: "Apr 2024", programs: "web dev" },
+    { name: "Maliha", joined: "May 2024", programs: "data science" },
   ];
 
   return (
