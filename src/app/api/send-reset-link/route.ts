@@ -17,11 +17,8 @@ export async function POST(req: Request) {
     },
   });
 
-  const isLocalhost = process.env.NODE_ENV !== "production";
-  const resetLink = isLocalhost
-    ? `http://localhost:3000/reset-password?email=${email}`
-    : `https://portalcombinefoundation.vercel.app/reset-password?email=${email}`;
-  
+  const resetLink = `https://portalcombine-foundation.vercel.app/reset-password?email=${email}`;
+
   try {
     await transporter.sendMail({
       from: `"Combine Foundation" <${process.env.EMAIL_USER}>`,
