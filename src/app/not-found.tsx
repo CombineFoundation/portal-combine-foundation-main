@@ -3,14 +3,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import LOGO from "./images/logo.png";
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-white text-gray-800 text-center">
-      {/* Inline SVG */}
       <div className="w-72 sm:w-96 mb-6">
         <Image
-          src="https://undraw.co/api/illustrations/4a56f2e0-8815-4394-bbff-54da781c2e63"
+          src={LOGO}
           alt="404 Illustration"
           width={300}
           height={300}
