@@ -102,7 +102,7 @@ const VolunteerDashboard = () => {
         </div>
 
         {/* Dashboard Widgets */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {/* Upcoming Lectures Card */}
           <div className="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
             <div className="bg-orange-600 px-4 py-3">
@@ -189,53 +189,6 @@ const VolunteerDashboard = () => {
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Pending Tasks Card */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
-            <div className="bg-orange-600 px-4 py-3">
-              <h2 className="text-lg font-semibold text-white">
-                PENDING TASKS
-              </h2>
-            </div>
-            <div className="p-4">
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <input
-                    title="Complete training module"
-                    type="checkbox"
-                    className="rounded text-orange-600 mr-3 cursor-pointer"
-                  />
-                  <span className="text-gray-800">
-                    Complete training module
-                  </span>
-                </li>
-                <li className="flex items-center">
-                  <input
-                    title="Submit volunteer hours"
-                    type="checkbox"
-                    className="rounded text-orange-600 mr-3 cursor-pointer"
-                  />
-                  <span className="text-gray-800">Submit volunteer hours</span>
-                </li>
-                <li className="flex items-center">
-                  <input
-                    title="Review safety guidelines"
-                    type="checkbox"
-                    className="rounded text-orange-600 mr-3 cursor-pointer"
-                  />
-                  <span className="text-gray-800">
-                    Review safety guidelines
-                  </span>
-                </li>
-              </ul>
-              <button
-                onClick={() => router.push("/volunteer/tasks")}
-                className="mt-3 text-orange-600 hover:text-orange-700 text-sm font-medium cursor-pointer"
-              >
-                View All Tasks →
-              </button>
             </div>
           </div>
         </div>
