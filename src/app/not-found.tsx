@@ -1,4 +1,4 @@
-// src/app/not-found.tsx
+// app/not-found.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,25 +6,29 @@ import Image from "next/image";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 text-center">
-      <Image
-        src="https://illustrations.popsy.co/gray/error-404.svg"
-        alt="404 Not Found"
-        width={300}
-        height={300}
-        className="mb-6"
-      />
-      <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
-        404 - Page Not Found
-      </h1>
-      <p className="text-lg text-gray-600 mb-6">
-        Oops! The page you are looking for doesn&apos;t exist or has been moved.
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-white text-gray-800 text-center">
+      {/* Inline SVG */}
+      <div className="w-72 sm:w-96 mb-6">
+        <Image
+          src="https://undraw.co/api/illustrations/4a56f2e0-8815-4394-bbff-54da781c2e63"
+          alt="404 Illustration"
+          width={300}
+          height={300}
+          className="mb-6"
+        />
+      </div>
+
+      <h1 className="text-3xl sm:text-4xl font-bold mb-4">Page Not Found</h1>
+      <p className="text-gray-500 mb-6">
+        Sorry, the page you are looking for doesn&apos;t exist or has been
+        moved.
       </p>
+
       <Link
         href="/"
-        className="inline-block bg-orange-500 text-white px-6 py-3 rounded hover:bg-orange-600 transition"
+        className="inline-block px-6 py-3 bg-orange-500 text-white font-semibold rounded hover:bg-orange-600 transition"
       >
-        Go back to Home
+        Go back home
       </Link>
     </div>
   );
