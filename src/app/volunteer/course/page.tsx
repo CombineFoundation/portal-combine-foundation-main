@@ -4,7 +4,7 @@ import { useState } from "react";
 import Sidebar from "../../components/SideBar-vol";
 
 const CoursePage = () => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   // Array of course data
   const courses = [
@@ -93,7 +93,7 @@ const CoursePage = () => {
       {/* Main Content */}
       <main
         className={`flex-1 p-4 md:p-8 transition-all duration-300 ${
-          isCollapsed ? "md:ml-0" : "md:ml-64"
+          isCollapsed ? "md:ml-16" : "md:ml-64"
         }`}
       >
         {/* Header */}
@@ -122,7 +122,7 @@ const CoursePage = () => {
                 </div>
                 <div>
                   <button
-                    className="cursor-pointer p-4 text-white bg-orange-600 hover:bg-orange-700 w-1/2 md:w-40 rounded-lg transition-colors"
+                    className="cursor-pointer px-4 py-3 text-white bg-orange-600 hover:bg-orange-700 w-full md:w-40 rounded-lg text-center transition-colors"
                     aria-label={`Enroll in ${course.title}`}
                     onClick={() => window.open(course.classroomUrl, "_blank")}
                   >

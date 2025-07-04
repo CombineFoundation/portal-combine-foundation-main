@@ -51,7 +51,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,13 +62,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const SidebarContent = () => (
+  const SidebarContent = (
     <div
-      className={`h-full flex flex-col bg-white shadow-md transition-all duration-300 ${
-        collapsed ? "w-[80px]" : "w-[250px]"
-      }`}
+      className={`h-screen flex flex-col bg-white shadow-md z-50 transition-all duration-300 
+        ${collapsed ? "w-[80px]" : "w-[250px]"}
+        ${isMobile ? "fixed top-0 left-0" : "md:fixed md:top-0 md:left-0"}
+      `}
     >
-      {/* Logo & Toggle */}
+      {/* Logo and Toggle */}
       <div className="flex items-center justify-between px-4 py-3 border-b">
         {!collapsed && (
           <Image
@@ -79,15 +80,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
           />
         )}
         <button
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={() =>
+            isMobile ? setShowMobileSidebar(false) : setCollapsed(!collapsed)
+          }
           className="ml-auto cursor-pointer"
         >
           {collapsed ? <Menu size={24} /> : <X size={24} />}
         </button>
       </div>
 
-      {/* Menu */}
-      <nav className="flex-1 overflow-y-auto">
+      {/* Menu Items */}
+      <nav className="flex-1 overflow-y-auto py-2 px-1">
         {menuItems.map((item) => (
           <Link
             key={item.path}
@@ -97,7 +100,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 ? "bg-[#FF5D15] text-white"
                 : "text-gray-700 hover:bg-gray-100"
             }`}
-            onClick={() => isMobile && setIsOpen(false)}
+            onClick={() => isMobile && setShowMobileSidebar(false)}
           >
             {item.icon}
             {!collapsed && <span>{item.label}</span>}
@@ -109,11 +112,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      {/* Mobile Top Bar */}
+      {/* Top Bar on Mobile */}
       {isMobile && (
-        <header className="bg-white px-4 py-3 shadow-md flex items-center justify-between sticky top-0 z-50">
-          <button onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+        <div className="flex items-center justify-between px-4 py-3 bg-white shadow-md sticky top-0 z-40">
+          <button
+            title="Toggle Sidebar"
+            onClick={() => setShowMobileSidebar(!showMobileSidebar)}
+          >
+            <Menu size={24} />
           </button>
           <Image
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/b689aca73d4a910f195fba599f1c1031158ed8ca"
@@ -121,29 +127,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
             width={100}
             height={40}
           />
-        </header>
+        </div>
       )}
 
-      {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 h-screen bg-white z-40 transition-transform duration-300 ${
-          isMobile
-            ? isOpen
-              ? "translate-x-0"
-              : "-translate-x-full"
-            : "translate-x-0"
+      {/* Render Sidebar */}
+      {isMobile ? (
+        showMobileSidebar && SidebarContent
+      ) : (
+        <aside>{SidebarContent}</aside>
+      )}
+
+      {/* Padding only on large screens */}
+      <div
+        className={`transition-all duration-300 ${
+          isMobile ? "" : collapsed ? "ml-[80px]" : "ml-[250px]"
         }`}
       >
-        {SidebarContent()}
-      </aside>
-
-      {/* Body Padding */}
-      <div
-        className={`${
-          isMobile ? "" : collapsed ? "ml-[80px]" : "ml-[250px]"
-        } transition-all duration-300`}
-      >
-        {/* Your page content goes here */}
+        {/* Your page content here */}
       </div>
     </>
   );

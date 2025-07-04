@@ -51,17 +51,23 @@ export default function VolunteerLightingUsage() {
     { name: "Miss Maliha", email: "ali@gmail.com", status: "Active" },
   ];
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  useEffect(() => {
+    if (isMobile) {
+      setCollapsed(true); // Force collapse on mobile
+    }
+  }, [isMobile]);
+
   const filteredVolunteers = volunteers
     .filter((volunteer) =>
       volunteer.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .sort((a, b) => {
-      if (sortOrder === "newest") {
-        return a.name.localeCompare(b.name);
-      } else {
-        return b.name.localeCompare(a.name);
-      }
-    });
+    .sort((a, b) =>
+      sortOrder === "newest"
+        ? a.name.localeCompare(b.name)
+        : b.name.localeCompare(a.name)
+    );
 
   const getGradient = (ctx: CanvasRenderingContext2D) => {
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -70,7 +76,6 @@ export default function VolunteerLightingUsage() {
     return gradient;
   };
 
-  // Chart data configuration
   const chartData = {
     labels: ["00-02", "00-03", "00-04", "00-05", "00-06", "00-07"],
     datasets: [
@@ -96,28 +101,16 @@ export default function VolunteerLightingUsage() {
     ],
   };
 
-  // Chart options configuration
   const chartOptions: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
-    animation: {
-      duration: 1000,
-      easing: "easeInOutQuart",
-    },
     plugins: {
-      legend: {
-        display: false,
-      },
+      legend: { display: false },
       tooltip: {
         enabled: true,
         backgroundColor: "rgba(31, 41, 55, 0.9)",
-        titleFont: {
-          size: 14,
-          weight: "bold",
-        },
-        bodyFont: {
-          size: 12,
-        },
+        titleFont: { size: 14, weight: "bold" },
+        bodyFont: { size: 12 },
         callbacks: {
           label: (context) => `Usage: ${context.raw}`,
         },
@@ -125,15 +118,8 @@ export default function VolunteerLightingUsage() {
     },
     scales: {
       x: {
-        grid: {
-          display: false,
-        },
-        ticks: {
-          color: "#6B7280",
-          font: {
-            size: 12,
-          },
-        },
+        grid: { display: false },
+        ticks: { color: "#6B7280", font: { size: 12 } },
       },
       y: {
         display: false,
@@ -142,9 +128,7 @@ export default function VolunteerLightingUsage() {
       },
     },
     elements: {
-      line: {
-        tension: 0.4,
-      },
+      line: { tension: 0.4 },
     },
   };
 
@@ -171,19 +155,23 @@ export default function VolunteerLightingUsage() {
   useEffect(() => {
     const chartInstance = chartRef.current;
     return () => {
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
+      if (chartInstance) chartInstance.destroy();
     };
   }, []);
 
   return (
     <>
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Sidebar
+        collapsed={collapsed}
+        setCollapsed={(val) => {
+          if (!isMobile) setCollapsed(val); // prevent toggle on mobile
+        }}
+      />
+
       <div
         className={`min-h-screen bg-gray-50 p-6 transition-all duration-300 ${
           collapsed ? "ml-20" : "ml-64"
-        }`}
+        } max-md:ml-0`}
       >
         <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6 ring-2 ring-orange-400">
           <div className="flex justify-between items-center mb-6">
@@ -224,7 +212,7 @@ export default function VolunteerLightingUsage() {
                 <div className="text-sm font-medium text-gray-800">
                   SORT BY:
                   <select
-                    title="Sort By"
+                    title="Sort Order"
                     className="ml-2 border rounded px-2 py-1 text-gray-800 bg-white focus:ring-2 focus:ring-orange-400 focus:outline-none"
                     value={sortOrder}
                     onChange={(e) =>
@@ -248,7 +236,6 @@ export default function VolunteerLightingUsage() {
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       strokeLinecap="round"
@@ -262,7 +249,6 @@ export default function VolunteerLightingUsage() {
             </div>
           </div>
 
-          {/* Volunteers Table */}
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

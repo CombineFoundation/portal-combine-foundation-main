@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Sidebar } from "../../components/sidebar";
 import ADMIN from "../../images/ADMIN.png";
+import UploadIcon from "../../images/UPLOAD_2.png";
 
 const Profile = () => {
   const router = useRouter();
@@ -50,15 +51,17 @@ const Profile = () => {
         <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
           <div className="flex justify-center mb-6">
             <div
-              className="w-24 h-24 rounded-full border-4 border-orange-500 overflow-hidden cursor-pointer"
+              className="relative w-24 h-24 rounded-full border-4 border-orange-500 overflow-hidden group cursor-pointer"
               onClick={handleImageClick}
               title="Click to change profile picture"
             >
+              {/* Profile Image */}
               {selectedImage ? (
                 <Image
                   src={selectedImage}
                   alt="Selected"
                   className="w-full h-full object-cover"
+                  fill
                 />
               ) : (
                 <Image
@@ -69,8 +72,20 @@ const Profile = () => {
                   height={96}
                 />
               )}
+
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Image
+                  src={UploadIcon}
+                  alt="Upload Icon"
+                  width={30}
+                  height={30}
+                  className="opacity-80"
+                />
+              </div>
             </div>
-            {/* Hidden input to trigger on click */}
+
+            {/* Hidden File Input */}
             <input
               title="Upload Profile Picture"
               type="file"
@@ -104,7 +119,7 @@ const Profile = () => {
           <div className="mt-6 flex justify-center gap-4">
             <button
               className="w-full py-2 bg-gray-300 text-gray-700 cursor-pointer rounded-md shadow-md hover:bg-gray-400 transition-colors"
-              onClick={() => router.push("/trustee")}
+              onClick={() => router.push("/")}
             >
               Logout
             </button>

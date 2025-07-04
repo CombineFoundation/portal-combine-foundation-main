@@ -1,7 +1,7 @@
 "use client";
 
 import { Sidebar } from "../../components/sidebar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const programs = [
   {
@@ -28,14 +28,28 @@ const programs = [
 
 const ProgramsPage = () => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  useEffect(() => {
+    if (isMobile) {
+      setCollapsed(true); // Auto collapse sidebar on small screens
+    }
+  }, [isMobile]);
+
   return (
     <>
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Sidebar
+        collapsed={collapsed}
+        setCollapsed={(val) => {
+          if (!isMobile) setCollapsed(val); // Disable toggle on small screens
+        }}
+      />
 
       <main
         className={`min-h-screen bg-gray-50 px-6 py-12 transition-all duration-300 ${
           collapsed ? "ml-20" : "ml-64"
-        }`}
+        } max-md:ml-0`}
       >
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
@@ -46,7 +60,7 @@ const ProgramsPage = () => {
             support and uplift communities.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {programs.map((program, index) => (
               <div
                 key={index}
