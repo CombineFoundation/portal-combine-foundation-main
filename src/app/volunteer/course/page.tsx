@@ -92,10 +92,18 @@ const CoursePage = () => {
 
       {/* Main Content */}
       <main
+<<<<<<< HEAD
         className={`flex-1 p-4 md:p-8 transition-all duration-300 ${
           isCollapsed ? "md:ml-16" : "md:ml-64"
         }`}
       >
+=======
+       className={`flex-1 p-4 md:p-8 transition-all duration-300 ${
+       isCollapsed ? "md:ml-16" : "md:ml-64"
+      }`}
+>
+
+>>>>>>> 0c8a77c23016f002aedcc59b2ed024943fe44bdf
         {/* Header */}
         <div className="flex justify-between items-center mb-8 pl-10 md:pl-0">
           <h1 className="text-2xl md:text-3xl font-bold text-orange-600">
@@ -122,7 +130,12 @@ const CoursePage = () => {
                 </div>
                 <div>
                   <button
+<<<<<<< HEAD
                     className="cursor-pointer px-4 py-3 text-white bg-orange-600 hover:bg-orange-700 w-full md:w-40 rounded-lg text-center transition-colors"
+=======
+                   className="cursor-pointer px-4 py-3 text-white bg-orange-600 hover:bg-orange-700 w-full md:w-40 rounded-lg text-center transition-colors"
+
+>>>>>>> 0c8a77c23016f002aedcc59b2ed024943fe44bdf
                     aria-label={`Enroll in ${course.title}`}
                     onClick={() => window.open(course.classroomUrl, "_blank")}
                   >
