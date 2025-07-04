@@ -2,37 +2,35 @@
   min-height: 100vh;
   background-color: var(--bg);
   padding: 2rem 1rem;
-  margin: 20px;
-  max-width: 1200px; /* Limit the max width */
-  margin-left: auto; /* Center the content */
-  margin-right: auto; /* Center the content */
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .profile-wrapper {
   display: flex;
-  padding: 10px;
-  background-color: var(--bg);
   flex-direction: column;
+  gap: 1.5rem;
 }
 
 @media (min-width: 1024px) {
   .profile-wrapper {
     flex-direction: row;
+    align-items: flex-start;
   }
 }
 
 .profile-box {
   background-color: #ffffff;
   padding: 1.5rem;
-  margin: 10px;
   border-radius: 8px;
   width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
 }
 
 @media (min-width: 1024px) {
   .profile-box {
-    width: 25%;
+    width: 30%;
   }
 }
 
@@ -51,6 +49,7 @@
 .email {
   color: #6b7280;
   margin: 0.5rem 0 1rem;
+  word-wrap: break-word;
 }
 
 .info {
@@ -64,6 +63,7 @@
   gap: 8px;
   margin: 12px 0;
   color: #374151;
+  word-break: break-word;
 }
 
 .main-content {
@@ -75,7 +75,7 @@
 
 @media (min-width: 1024px) {
   .main-content {
-    width: 75%;
+    width: 70%;
   }
 }
 
@@ -85,9 +85,15 @@
   gap: 1rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .info-boxes {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .info-boxes {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -105,12 +111,14 @@
   font-size: 0.875rem;
   color: #6b7280;
   margin-bottom: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .value {
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 1rem;
+  word-break: break-word;
 }
 
 .active-course {
@@ -133,73 +141,18 @@
 }
 
 .status-btn {
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   border: 1px solid #000;
   background: white;
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .status-btn:hover {
   border: none;
   color: #ffffff;
   background-color: #ff5d15;
-}
-
-/* Mobile Styles */
-@media (max-width: 675px) {
-  .profile-wrapper {
-    flex-direction: column; /* Stack the sidebar and content vertically */
-    padding: 1rem;
-  }
-
-  .profile-box {
-    width: 100%; /* Full width for mobile devices */
-    margin-bottom: 1rem;
-  }
-
-  .avatar {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1rem;
-  }
-
-  .profile-content h2 {
-    font-size: 1.25rem;
-  }
-
-  .info {
-    font-size: 0.875rem; /* Slightly smaller font size for mobile */
-  }
-
-  .info-item {
-    font-size: 0.875rem;
-  }
-
-  .main-content {
-    width: 100%; /* Ensure main content takes up full width */
-    gap: 1rem;
-  }
-
-  .info-boxes {
-    grid-template-columns: 1fr; /* Stack info boxes on top of each other */
-  }
-
-  .info-box {
-    padding: 1rem;
-  }
-
-  .label {
-    font-size: 0.75rem; /* Smaller label font size for mobile */
-  }
-
-  .value {
-    font-size: 0.875rem; /* Slightly smaller value font size */
-  }
-
-  .status-btn {
-    padding: 6px 12px; /* Smaller button size */
-  }
 }

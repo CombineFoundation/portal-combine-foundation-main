@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   FaPhoneAlt,
@@ -7,11 +7,12 @@ import {
   FaCalendarAlt,
   FaIdCard,
   FaGraduationCap,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 import Sidebar from "../../../components/SideBar-vol";
-import { useRef, useState, ChangeEvent } from 'react';
-import Image from 'next/image';
+import { useRef, useState, ChangeEvent } from "react";
+import Image from "next/image";
 import ADMIN from "../../../images/ADMIN.png";
+import UploadIcon from "../../../images/UPLOAD_2.png";
 
 export default function Profile() {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -36,15 +37,37 @@ export default function Profile() {
         <button
           className="p-2 rounded-md bg-orange-600 text-white"
           onClick={() => setIsCollapsed(!isCollapsed)}
-          aria-label={isCollapsed ? 'Open menu' : 'Close menu'}
+          aria-label={isCollapsed ? "Open menu" : "Close menu"}
         >
           {isCollapsed ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           )}
         </button>
@@ -56,7 +79,9 @@ export default function Profile() {
       <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
 
       {/* Main Content */}
-      <main className={`flex-1 transition-all duration-300 ${isCollapsed ? 'md:ml-0' : 'md:ml-64'} mt-14 md:mt-0`}>
+      <main
+        className={`flex-1 transition-all duration-300 ${isCollapsed ? "md:ml-0" : "md:ml-64"} mt-14 md:mt-0`}
+      >
         <div className="p-3 sm:p-4 md:p-6 lg:p-8">
           <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
             {/* Profile Card */}
@@ -66,7 +91,9 @@ export default function Profile() {
                 <div
                   className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 relative rounded-full overflow-hidden mb-3 sm:mb-4 cursor-pointer group"
                   onClick={handleImageClick}
+                  title="Click to change profile picture"
                 >
+                  {/* Profile Image */}
                   <Image
                     src={selectedImage || ADMIN}
                     alt="Avatar"
@@ -74,7 +101,21 @@ export default function Profile() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 96px, (max-width: 1024px) 112px, 128px"
                   />
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-white bg-opacity-60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                    <Image
+                      src={UploadIcon}
+                      alt="Upload Icon"
+                      width={30}
+                      height={30} 
+                      className="opacity-80"
+                    />
+                  </div>
+
+                  {/* Hidden File Input */}
                   <input
+                    title="Upload Profile Picture"
                     type="file"
                     accept="image/*"
                     onChange={handleFileChange}
@@ -83,8 +124,12 @@ export default function Profile() {
                   />
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center">Muhammad Ali</h2>
-                <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 text-center">muhammadali221@gmail.com</p>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center">
+                  Muhammad Ali
+                </h2>
+                <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 text-center">
+                  muhammadali221@gmail.com
+                </p>
 
                 <div className="w-full space-y-3 sm:space-y-4">
                   <div className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-gray-800">
@@ -108,16 +153,24 @@ export default function Profile() {
                     <div>
                       <div className="flex items-center gap-2 text-gray-700 mb-1">
                         <FaUser className="text-gray-600 text-sm" />
-                        <span className="text-xs sm:text-sm font-medium">Full Name</span>
+                        <span className="text-xs sm:text-sm font-medium">
+                          Full Name
+                        </span>
                       </div>
-                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">Muhammad Ali</p>
+                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">
+                        Muhammad Ali
+                      </p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-gray-700 mb-1">
                         <FaCalendarAlt className="text-gray-600 text-sm" />
-                        <span className="text-xs sm:text-sm font-medium">Date Of Birth</span>
+                        <span className="text-xs sm:text-sm font-medium">
+                          Date Of Birth
+                        </span>
                       </div>
-                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">July 28, 2010</p>
+                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">
+                        July 28, 2010
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -128,16 +181,24 @@ export default function Profile() {
                     <div>
                       <div className="flex items-center gap-2 text-gray-700 mb-1">
                         <FaUser className="text-gray-600 text-sm" />
-                        <span className="text-xs sm:text-sm font-medium">Gender</span>
+                        <span className="text-xs sm:text-sm font-medium">
+                          Gender
+                        </span>
                       </div>
-                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">Male</p>
+                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">
+                        Male
+                      </p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 text-gray-700 mb-1">
                         <FaIdCard className="text-gray-600 text-sm" />
-                        <span className="text-xs sm:text-sm font-medium">CNIC</span>
+                        <span className="text-xs sm:text-sm font-medium">
+                          CNIC
+                        </span>
                       </div>
-                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">42206856687</p>
+                      <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">
+                        42206856687
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -147,16 +208,24 @@ export default function Profile() {
               <div className="bg-white rounded-lg shadow p-4 sm:p-6">
                 <div className="flex items-center gap-2 text-gray-700 mb-1 sm:mb-2">
                   <FaGraduationCap className="text-gray-600 text-sm" />
-                  <span className="text-xs sm:text-sm font-medium">Qualification</span>
+                  <span className="text-xs sm:text-sm font-medium">
+                    Qualification
+                  </span>
                 </div>
-                <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">Intermediate</p>
+                <p className="text-sm sm:text-base text-gray-800 ml-5 sm:ml-6">
+                  Intermediate
+                </p>
               </div>
 
               {/* Course Info */}
               <div className="bg-orange-50 rounded-lg shadow p-4 sm:p-6 border border-orange-100">
-                <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Active Course</p>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">
+                  Active Course
+                </p>
                 <p className="text-sm sm:text-base text-gray-800">
-                  Course Name: <strong className="font-semibold">Lorem</strong> | Roll Number: <strong className="font-semibold">99088</strong>
+                  Course Name: <strong className="font-semibold">Lorem</strong>{" "}
+                  | Roll Number:{" "}
+                  <strong className="font-semibold">99088</strong>
                 </p>
               </div>
             </div>
