@@ -1,44 +1,30 @@
+// src/app/components/lectures/LectureGrid.tsx
+
 "use client";
 
-import React, { useState } from "react";
-import { LectureCard } from "./LectureCard";
+import React from "react";
+import LectureCard from "./LectureCard";
 
-export const LectureGrid: React.FC = () => {
-  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+interface Lecture {
+  id: number;
+  imageUrl: string;
+  title: string;
+  description: string;
+  videoLink: string;
+}
 
-  // Sample lecture data
-  const [lectures, setLectures] = useState([
-    {
-      id: 1,
-      imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/bdcf1b0578b5ef813b85d4746194fd65998d12c4",
-      title: "Lorem",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      width: 610,
-      height: 200,
-    },
-    {
-      id: 2,
-      imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/149674a107a966a118f53277be5f0bc9520e9f4c",
-      title: "Lorem",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      width: 610,
-      height: 200,
-    },
-    {
-      id: 3,
-      imageUrl:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/5c7ca30762de45f3ab5f43c966562565ebd08d15",
-      title: "Lorem",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      width: 610,
-      height: 200,
-    },
-  ]);
+interface LectureGridProps {
+  lectures: Lecture[];
+  onDelete: (id: number) => void;
+}
+
+export const LectureGrid: React.FC<LectureGridProps> = ({
+  lectures,
+  onDelete,
+}) => {
+  const [sortOrder, setSortOrder] = React.useState<"newest" | "oldest">(
+    "newest"
+  );
 
   const toggleSort = () => {
     setSortOrder((prev) => (prev === "newest" ? "oldest" : "newest"));
@@ -47,13 +33,6 @@ export const LectureGrid: React.FC = () => {
   const sortedLectures = [...lectures].sort((a, b) => {
     return sortOrder === "newest" ? b.id - a.id : a.id - b.id;
   });
-
-  // Delete function
-  const handleDelete = (id: number) => {
-    setLectures((prevLectures) =>
-      prevLectures.filter((lecture) => lecture.id !== id)
-    );
-  };
 
   return (
     <section>
@@ -71,17 +50,21 @@ export const LectureGrid: React.FC = () => {
           </button>
         </div>
       </div>
+
       <div className="grid grid-cols-3 gap-4 mt-5 max-md:grid-cols-2 max-sm:grid-cols-1">
         {sortedLectures.map((lecture) => (
           <LectureCard
             key={lecture.id}
             imageUrl={lecture.imageUrl}
+            videoLink={lecture.videoLink}
             title={lecture.title}
             description={lecture.description}
-            onDelete={() => handleDelete(lecture.id)} // Deleting the lecture on click
+            onDelete={() => onDelete(lecture.id)}
           />
         ))}
       </div>
     </section>
   );
 };
+
+export default LectureGrid;

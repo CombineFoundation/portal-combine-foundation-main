@@ -1,3 +1,4 @@
+// src/app/volunteer/lecture/page.tsx
 "use client";
 
 import Sidebar from "../../components/SideBar-vol";

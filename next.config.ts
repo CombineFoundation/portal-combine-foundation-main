@@ -2,12 +2,31 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      "randomuser.me",
-      "images.unsplash.com",
-      "cdn.builder.io",
-      "i.pravatar.cc",
-      "cdn-icons-png.flaticon.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "randomuser.me",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.builder.io",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn-icons-png.flaticon.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com", // optional, only if ever used
+      },
     ],
   },
 };

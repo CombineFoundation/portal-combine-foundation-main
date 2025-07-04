@@ -1,40 +1,64 @@
-import Image from "next/image";
+"use client";
+
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface LectureCardProps {
   imageUrl: string;
+  videoLink: string; // ✅ Add this
   title: string;
   description: string;
   onDelete: () => void;
 }
 
-export const LectureCard: React.FC<LectureCardProps> = ({
+const LectureCard: React.FC<LectureCardProps> = ({
   imageUrl,
+  videoLink,
   title,
   description,
   onDelete,
 }) => {
   return (
-    <article className="bg-white overflow-hidden rounded-[5px]">
+    <div className="bg-white rounded shadow p-4 flex flex-col">
+      {/* Thumbnail */}
       <Image
         src={imageUrl}
         alt={title}
-        className="w-full h-[224px] object-cover"
-        width={224}
-        height={224}
+        width={610}
+        height={200}
+        className="rounded mb-3 object-cover w-full h-[160px]"
       />
-      <div className="p-8">
-        <h3 className="text-xl font-semibold text-[#1A1A1A] mb-[15px]">
-          {title}
-        </h3>
-        <p className="text-base text-black uppercase mb-5">{description}</p>
+
+      {/* Title and Description */}
+      <h3 className="text-lg font-semibold text-black">{title}</h3>
+      <p className="text-sm text-gray-700 mt-1 flex-1">{description}</p>
+
+      {/* Buttons */}
+      <div className="mt-4 flex justify-between items-center">
+        {videoLink && (
+          <Link
+            href={videoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-orange-100 text-orange-600 px-4 py-2 rounded hover:bg-orange-200 text-sm font-medium"
+          >
+            Watch Now
+          </Link>
+        )}
+
         <button
-          onClick={onDelete}
-          className="bg-[#f16d00] text-white text-base font-bold leading-[19.2px] capitalize p-2.5 rounded-[5px] hover:bg-[#000000] transition-colors"
+          onClick={() => {
+            if (confirm("Are you sure you want to delete this lecture?")) {
+              onDelete();
+            }
+          }}
+          className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 text-sm"
         >
-          DELETE LECTURE
+          Delete
         </button>
       </div>
-    </article>
+    </div>
   );
 };
+export default LectureCard;
