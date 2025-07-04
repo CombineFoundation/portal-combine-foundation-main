@@ -6,7 +6,6 @@ import Sidebar from "../../components/SideBar-vol";
 const CoursePage = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  // Array of course data
   const courses = [
     {
       id: 1,
@@ -26,35 +25,33 @@ const CoursePage = () => {
       button: "Enroll Now",
       classroomUrl: "https://classroom.google.com/c/Nzg1NDgzNDExNDky",
     },
-    // {
-    //   id: 3,
-    //   badge: "THIRD COURSE",
-    //   title: "Leadership in Volunteering",
-    //   description:
-    //     "Develop leadership skills and learn to manage teams during community events.",
-    //   // button: "Start Learning",
-    //   button: "Enroll Now",
-    //   classroomUrl: "https://classroom.google.com/c/third-course-id",
-    // },
-    // {
-    //   id: 4,
-    //   badge: "FOURTH COURSE",
-    //   title: "Emergency Response Basics",
-    //   description:
-    //     "Learn basic safety, first aid, and emergency response techniques for volunteers.",
-    //   // button: "Access Now",
-    //   button: "Enroll Now",
-    //   classroomUrl: "https://classroom.google.com/c/fourth-course-id",
-    // },
+    {
+      id: 3,
+      badge: "THIRD COURSE",
+      title: "Data Science & Machine Learning",
+      description:
+        "📊 Learn how to clean, analyze, and model data using Python, Pandas, Scikit-learn, and real-world projects.",
+      button: "Enroll Now",
+      classroomUrl: "https://classroom.google.com/c/Nzg1NDgzNDExNDky",
+    },
+    {
+      id: 4,
+      badge: "FOURTH COURSE",
+      title: "AI & Machine Learning",
+      description:
+        "🧠 Dive deeper into neural networks, algorithms, and production-level ML pipelines.",
+      button: "Enroll Now",
+      classroomUrl: "https://classroom.google.com/c/Nzg1NDgzNDExNDky",
+    },
   ];
 
   return (
-    <div className="flex min-h-screen bg-white">
-      {/* Mobile Sidebar Toggle */}
+    <div className="flex h-screen overflow-hidden">
+      {/* Mobile Sidebar Toggle Button */}
       <button
         className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-orange-600 text-white"
         onClick={() => setIsCollapsed(!isCollapsed)}
-        aria-label={isCollapsed ? "Open menu" : "Close menu"}
+        aria-label={isCollapsed ? "Open sidebar" : "Close sidebar"}
       >
         {isCollapsed ? (
           <svg
@@ -90,20 +87,12 @@ const CoursePage = () => {
       {/* Sidebar */}
       <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <main
-<<<<<<< HEAD
-        className={`flex-1 p-4 md:p-8 transition-all duration-300 ${
+        className={`flex-1 overflow-y-auto bg-white p-4 md:p-8 transition-all duration-300 ${
           isCollapsed ? "md:ml-16" : "md:ml-64"
         }`}
       >
-=======
-       className={`flex-1 p-4 md:p-8 transition-all duration-300 ${
-       isCollapsed ? "md:ml-16" : "md:ml-64"
-      }`}
->
-
->>>>>>> 0c8a77c23016f002aedcc59b2ed024943fe44bdf
         {/* Header */}
         <div className="flex justify-between items-center mb-8 pl-10 md:pl-0">
           <h1 className="text-2xl md:text-3xl font-bold text-orange-600">
@@ -111,8 +100,8 @@ const CoursePage = () => {
           </h1>
         </div>
 
-        {/* Courses Section */}
-        <div className="space-y-6 max-w-4xl mr-18 mx-auto">
+        {/* Courses */}
+        <div className="space-y-6 max-w-4xl mx-auto pb-16">
           {courses.map((course) => (
             <div
               key={course.id}
@@ -130,12 +119,7 @@ const CoursePage = () => {
                 </div>
                 <div>
                   <button
-<<<<<<< HEAD
                     className="cursor-pointer px-4 py-3 text-white bg-orange-600 hover:bg-orange-700 w-full md:w-40 rounded-lg text-center transition-colors"
-=======
-                   className="cursor-pointer px-4 py-3 text-white bg-orange-600 hover:bg-orange-700 w-full md:w-40 rounded-lg text-center transition-colors"
-
->>>>>>> 0c8a77c23016f002aedcc59b2ed024943fe44bdf
                     aria-label={`Enroll in ${course.title}`}
                     onClick={() => window.open(course.classroomUrl, "_blank")}
                   >
