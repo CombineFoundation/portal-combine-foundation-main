@@ -93,14 +93,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         <div className="flex-1 flex flex-col">
           {menuItems.map((item) => {
+            const isActive = currentPath === item.path;
+
             if (item.label === "LogOut") {
               return (
                 <button
                   key="logout"
                   onClick={() => setShowLogoutConfirm(true)}
-                  className={`flex items-center h-11 px-4 text-xl font-medium border-b text-[#121212] hover:bg-[#f9f9f9] transition-all ${
+                  className={`flex items-center h-11 px-4 text-xl font-medium transition-all ${
                     collapsed ? "justify-center" : ""
-                  }`}
+                  } text-[#121212] border-b hover:bg-[#f9f9f9] hover:text-zinc-900`}
                 >
                   <span className="mr-2">{item.icon}</span>
                   {!collapsed && <span>{item.label}</span>}
@@ -112,12 +114,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <Link
                 key={item.path}
                 href={item.path}
-                className={`flex items-center h-11 px-4 ${
-                  currentPath === item.path
-                    ? "bg-[#FF5D15] text-white"
-                    : "border-b border-[#E6E6E6] text-[#121212]"
-                } text-xl font-medium hover:bg-[#f9f9f9] transition-all ${
+                className={`flex items-center h-11 px-4 text-xl font-medium transition-all ${
                   collapsed ? "justify-center" : ""
+                } ${
+                  isActive
+                    ? "bg-[#FF5D15] text-white"
+                    : "text-[#121212] border-b hover:bg-[#f9f9f9] hover:text-zinc-900"
                 }`}
               >
                 <span className="mr-2">{item.icon}</span>
