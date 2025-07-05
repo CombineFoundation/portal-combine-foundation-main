@@ -109,20 +109,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
             }
 
             return (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`flex items-center h-11 px-4 ${
-                  currentPath === item.path
-                    ? "bg-[#FF5D15] text-white"
-                    : "border-b border-[#E6E6E6] text-[#121212]"
-                } text-xl font-medium hover:bg-[#f9f9f9] transition-all ${
-                  collapsed ? "justify-center" : ""
-                }`}
-              >
-                <span className="mr-2">{item.icon}</span>
-                {!collapsed && <span>{item.label}</span>}
-              </Link>
+              return (
+  <Link
+    key={item.path}
+    href={item.path}
+    className={`flex items-center h-11 px-4 ${
+      currentPath === item.path
+        ? "bg-[#FF5D15] text-white hover:text-zinc-900"
+        : "border-b border-[#E6E6E6] text-[#121212] hover:bg-[#f9f9f9] hover:text-zinc-900"
+    } text-xl font-medium transition-all ${
+      collapsed ? "justify-center" : ""
+    }`}
+  >
+    <span className="mr-2">{item.icon}</span>
+    {!collapsed && <span>{item.label}</span>}
+  </Link>
+);
+
             );
           })}
         </div>
