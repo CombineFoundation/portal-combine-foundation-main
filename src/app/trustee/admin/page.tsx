@@ -177,7 +177,7 @@ export default function VolunteerLightingUsage() {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h1 className="text-2xl font-bold text-gray-800">
-                VOLUNTEER LIGHTING USAGE AT CRAFT ORCHARD
+                Total Admin Count
               </h1>
               <div className="flex items-center mt-2">
                 <span className="text-3xl font-bold text-gray-800">23,456</span>
@@ -188,7 +188,7 @@ export default function VolunteerLightingUsage() {
 
           <div className="mb-8">
             <h2 className="text-lg font-semibold mb-2 text-gray-800">
-              USAGES:
+              Admin Graph
             </h2>
             <div className="h-64 relative">
               <Chart
@@ -200,9 +200,9 @@ export default function VolunteerLightingUsage() {
               />
             </div>
             <div className="flex justify-between mt-4 text-sm text-gray-600">
-              <span>Date</span>
-              <span>Last 7 days</span>
-              <span>Difficult date</span>
+              <span></span>
+              <span>Last 7 days report</span>
+              <span></span>
             </div>
           </div>
 

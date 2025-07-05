@@ -1,16 +1,22 @@
 "use client";
 
 import React from "react";
-import { CourseUpload } from "../../components/Courses/CourseUpload";
-import CourseGrid  from "../../components/Courses/CourseGrid";
+import CourseGrid from "../../components/Courses/CourseGrid";
 
-const Index: React.FC = () => {
+const CoursesPage: React.FC = () => {
   return (
-    <div>
-      <CourseUpload />
+    <div className="min-h-screen bg-gray-100 pt-10 px-6">
+      {/* Page Heading */}
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-orange-600">Courses</h1>
+        <p className="text-gray-600 mt-1">
+          Manage and publish courses for volunteers and students.
+        </p>
+      </div>
+
       <CourseGrid />
     </div>
   );
 };
 
-export default Index;
+export default CoursesPage;

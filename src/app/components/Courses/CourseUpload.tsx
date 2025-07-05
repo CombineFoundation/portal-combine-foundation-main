@@ -1,90 +1,131 @@
+// src/app/components/Courses/CourseUpload.tsx
 "use client";
 
-import React, { useCallback, useState, useRef } from "react";
-import { toast } from "../ui/use-toast";
-import Image from "next/image";
+import React, { useState } from "react";
 
-export const CourseUpload: React.FC = () => {
-  const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+interface Course {
+  id: number;
+  title: string;
+  heading: string;
+  description: string;
+  link: string;
+}
 
-  const handleFiles = (files: File[]) => {
-    if (files.length === 0) return;
+interface Props {
+  onAddCourse: (course: Course) => void;
+}
 
-    console.log("Files selected:", files);
+const CourseUpload: React.FC<Props> = ({ onAddCourse }) => {
+  const [title, setTitle] = useState("");
+  const [heading, setHeading] = useState("");
+  const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
 
-    toast({
-      title: "Files received",
-      description: `${files.length} file(s) have been selected.`,
-    });
-
-    // Add actual upload logic here
+  const handleDone = () => {
+    if (!title || !heading || !description || !link) {
+      alert("Please fill all fields.");
+      return;
+    }
+    setShowConfirm(true);
   };
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
+  const confirmAdd = () => {
+    onAddCourse({
+      id: Date.now(),
+      title,
+      heading,
+      description,
+      link,
+    });
 
-    const files = Array.from(e.dataTransfer.files);
-    handleFiles(files);
-  }, []);
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  }, []);
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  }, []);
-
-  const handleFileInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files ? Array.from(e.target.files) : [];
-      handleFiles(files);
-    },
-    []
-  );
-
-  const handleChooseFilesClick = () => {
-    fileInputRef.current?.click();
+    setTitle("");
+    setHeading("");
+    setDescription("");
+    setLink("");
+    setShowConfirm(false);
   };
 
   return (
-    <section
-      className={`border flex flex-col items-center justify-center min-h-[312px] bg-white mt-[67px] p-10 rounded-[5px] ${
-        isDragging ? "border-[#5C049F] border-2" : "border-[#E6E6E6]"
-      } transition-all duration-200`}
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-    >
-      <Image
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ff74cc58e7224af3a17d4d23bee40a555b71ebe6"
-        alt="Upload Courses"
-        className="w-[610px] max-w-full mb-[20px]"
-        width={610}
-        height={200}
-      />
-      <h2 className="text-[25px] font-semibold text-center text-black">
-        DRAG COURSE HERE TO ADD THEM OR
-      </h2>
+    <section className="max-w-5xl mx-auto p-6 mt-8 bg-white rounded shadow">
+      <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-l mt-10">
+        <div className="border-r border-b p-4">
+          <label className="text-sm font-medium text-black">Title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter course title"
+            className="text-black mt-1 w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-600"
+          />
+        </div>
+        <div className="border-r border-b p-4">
+          <label className="text-sm font-medium text-black">Heading</label>
+          <input
+            type="text"
+            value={heading}
+            onChange={(e) => setHeading(e.target.value)}
+            placeholder="Enter heading"
+            className="text-black mt-1 w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-600"
+          />
+        </div>
+        <div className="border-r border-b p-4 sm:col-span-2">
+          <label className="text-sm font-medium text-black">Description</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={4}
+            placeholder="Enter course description..."
+            className="text-black mt-1 w-full border px-3 py-2 rounded resize-none focus:outline-none focus:ring-2 focus:ring-orange-600"
+          />
+        </div>
+        <div className="border-r border-b p-4 sm:col-span-2">
+          <label className="text-sm font-medium text-black">
+            Classroom Link
+          </label>
+          <input
+            type="text"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            placeholder="Enter classroom or YouTube link"
+            className="text-black mt-1 w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-600"
+          />
+        </div>
+      </div>
+
       <button
-        onClick={handleChooseFilesClick}
-        className="text-2xl font-semibold text-[#5C049F] text-center hover:underline cursor-pointer"
+        onClick={handleDone}
+        className="cursor-pointer mt-6 w-full bg-orange-600 text-white py-3 rounded text-lg font-semibold hover:bg-orange-700"
       >
-        CHOOSE YOUR FILES
+        DONE
       </button>
-      <input
-        title="Choose Files"
-        type="file"
-        ref={fileInputRef}
-        className="hidden"
-        multiple
-        onChange={handleFileInputChange}
-        accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.mp3,.mov"
-      />
+
+      {showConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
+            <h3 className="text-lg font-bold text-black mb-2">Add Course?</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Are you sure you want to add this course?
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="px-4 py-2 border text-black rounded hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmAdd}
+                className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
+
+export default CourseUpload;

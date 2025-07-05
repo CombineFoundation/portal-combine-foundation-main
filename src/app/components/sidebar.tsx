@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   LayoutDashboard,
@@ -37,7 +37,6 @@ const menuItems = [
     path: "/trustee/beneficiaries",
     icon: <ClipboardList size={20} />,
   },
-  { label: "Logout", path: "/", icon: <LogOut size={20} /> },
 ];
 
 interface SidebarProps {
@@ -50,8 +49,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setCollapsed,
 }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,6 +62,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleLogout = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const confirmLogout = () => {
+    localStorage.removeItem("rememberMe");
+    router.push("/");
+    setShowLogoutConfirm(false);
+  };
 
   const SidebarContent = (
     <div
@@ -106,6 +117,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {!collapsed && <span>{item.label}</span>}
           </Link>
         ))}
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="w-full text-left flex items-center px-4 py-2 gap-3 text-sm font-medium text-gray-700 hover:bg-gray-100"
+        >
+          <LogOut size={20} />
+          {!collapsed && <span>Logout</span>}
+        </button>
       </nav>
     </div>
   );
@@ -137,7 +156,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <aside>{SidebarContent}</aside>
       )}
 
-      {/* Padding only on large screens */}
+      {/* Padding for content */}
       <div
         className={`transition-all duration-300 ${
           isMobile ? "" : collapsed ? "ml-[80px]" : "ml-[250px]"
@@ -145,6 +164,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
       >
         {/* Your page content here */}
       </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
+            <h2 className="text-lg font-bold text-black mb-2">Logout</h2>
+            <p className="text-sm text-gray-700 mb-4">
+              Are you sure you want to log out?
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowLogoutConfirm(false)}
+                className="px-4 py-2 border text-black rounded hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmLogout}
+                className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

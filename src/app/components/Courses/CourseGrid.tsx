@@ -1,81 +1,68 @@
-import * as React from "react";
-import { CourseCard } from "./CourseCard";
+// src/app/components/Courses/CourseGrid.tsx
+"use client";
+
+import React, { useState } from "react";
+import CourseUpload from "./CourseUpload";
+import CourseCard from "./CourseCard";
 
 interface Course {
-  id: string;
+  id: number;
   title: string;
   heading: string;
   description: string;
+  link: string;
 }
 
-export const CourseList: React.FC = () => {
-  const [courses, setCourses] = React.useState<Course[]>([
-    {
-      id: "1",
-      title: "FIRST COURSE",
-      heading: "Lorem",
-      description:
-        "LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY.",
-    },
-    {
-      id: "2",
-      title: "SECOND COURSE",
-      heading: "Lorem",
-      description:
-        "LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY.",
-    },
-  ]);
+const CourseGrid: React.FC = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [sortOrder, setSortOrder] = useState<"Newest" | "Oldest">("Newest");
 
-  const handleDeleteCourse = (courseId: string) => {
-    setCourses((prevCourses) =>
-      prevCourses.filter((course) => course.id !== courseId)
-    );
+  const handleAddCourse = (course: Course) => {
+    setCourses((prev) => [...prev, course]);
   };
 
-  const [sortOrder, setSortOrder] = React.useState<"Newest" | "Oldest">("Newest");
+  const handleDeleteCourse = (id: number) => {
+    setCourses((prev) => prev.filter((course) => course.id !== id));
+  };
 
   const toggleSort = () => {
-    setSortOrder((prevSortOrder) => (prevSortOrder === "Newest" ? "Oldest" : "Newest"));
+    setSortOrder((prev) => (prev === "Newest" ? "Oldest" : "Newest"));
   };
 
-  const sortedCourses = React.useMemo(() => {
-    return [...courses].sort((a, b) => {
-      return sortOrder === "Newest"
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title);
-    });
-  }, [courses, sortOrder]);
+  const sortedCourses = [...courses].sort((a, b) =>
+    sortOrder === "Newest" ? b.id - a.id : a.id - b.id
+  );
 
   return (
-    <section className="w-full px-6 py-8">
-      {/* Header row */}
-      <div className="flex flex-wrap justify-between items-center w-full mb-6">
-        <h2 className="text-2xl font-bold text-black">Recent Courses</h2>
-        <div className="flex items-center gap-3">
-          <span className="text-base font-medium text-black">Sort By:</span>
+    <>
+      <CourseUpload onAddCourse={handleAddCourse} />
+
+      <div className="max-w-7xl mx-auto px-6 mt-10">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-black">Recent Courses</h2>
           <button
             onClick={toggleSort}
-            className="text-base font-semibold text-black hover:underline cursor-pointer"
+            className="text-base font-semibold text-black hover:underline"
           >
-            {sortOrder.toUpperCase()} ↓
+            Sort: {sortOrder}
           </button>
         </div>
-      </div>
 
-      {/* Cards grid */}
-      <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1">
-        {sortedCourses.map((course) => (
-          <CourseCard
-            key={course.id}
-            title={course.title}
-            heading={course.heading}
-            description={course.description}
-            onDelete={() => handleDeleteCourse(course.id)}
-          />
-        ))}
+        <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1">
+          {sortedCourses.map((course) => (
+            <CourseCard
+              key={course.id}
+              title={course.title}
+              heading={course.heading}
+              description={course.description}
+              link={course.link}
+              onDelete={() => handleDeleteCourse(course.id)}
+            />
+          ))}
+        </div>
       </div>
-    </section>
+    </>
   );
 };
 
-export default CourseList;
+export default CourseGrid;
